@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="PotionPal:jar">
+    <output-path>$USER_HOME$/Desktop/minecraft/plugins</output-path>
+    <root id="archive" name="PotionPal.jar">
+      <element id="module-output" name="PotionPal" />
+    </root>
+  </artifact>
+</component>

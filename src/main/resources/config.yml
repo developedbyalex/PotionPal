@@ -1,0 +1,29 @@
+#  _____      _   _             _____      _
+# |  __ \    | | (_)           |  __ \    | |
+# | |__) |__ | |_ _  ___  _ __ | |__) |_ _| |
+# |  ___/ _ \| __| |/ _ \| '_ \|  ___/ _` | |
+# | |  | (_) | |_| | (_) | | | | |  | (_| | |
+# |_|   \___/ \__|_|\___/|_| |_|_|   \__,_|_|
+#
+
+prefix: '#55F881&lP#5CF58A&lo#62F392&lt#69F09B&li#70EEA4&lo#76EBAC&ln#7DE8B5&lP#83E6BD&la#8AE3C6&ll '
+
+items:
+  item1:
+    item: DIAMOND # This is what the item will be
+    type: OFFHAND # This will be if its activated when holding normal, or in offhand
+    display_name: '#ff5858Health Boost &8» '
+    lore:
+      - ''
+      - '&7Hold me to boost'
+      - '&7your health!'
+      - ''
+    potion_effects:
+      - HEALTH_BOOST:1 # POTION:LEVEL
+    action_bar:
+      enabled: true
+      message: '&7Health Boost: &aEnabled' # Send action bar message while being held
+    particles:
+      enabled: true
+      particle: 'HEART' # This will send a particle on the player every x amount of seconds.
+      amount: 1
