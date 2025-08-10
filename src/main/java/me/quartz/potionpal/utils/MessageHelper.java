@@ -5,9 +5,9 @@ import org.bukkit.ChatColor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ColorUtils {
+public class MessageHelper {
 
-    public static String translateColors(String message) {
+    public static String format(String message) {
         Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
         Matcher matcher = pattern.matcher(message);
         while (matcher.find()) {
@@ -15,7 +15,7 @@ public class ColorUtils {
             String replaceSharp = hexCode.replace('#', 'x');
 
             char[] ch = replaceSharp.toCharArray();
-            StringBuilder builder = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
             for (char c : ch) {
                 builder.append("&").append(c);
             }
