@@ -1,7 +1,7 @@
 package me.quartz.potionpal.commands;
 
 import me.quartz.potionpal.PotionPal;
-import me.quartz.potionpal.utils.ColorUtils;
+import me.quartz.potionpal.utils.MessageHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -28,6 +28,7 @@ public class PotionPalCommand implements CommandExecutor, TabCompleter {
                 if(strings[0].equalsIgnoreCase("reload")) {
                     if(commandSender.hasPermission("potionpal.reload")) {
                         PotionPal.getInstance().reloadConfig();
+                        PotionPal.getInstance().getTask().reload();
                         commandSender.sendMessage(ChatColor.GREEN + "Config has been reloaded.");
                     } else commandSender.sendMessage(ChatColor.RED + "No permissions!");
                 } else if(strings[0].equalsIgnoreCase("list")) {
@@ -50,15 +51,21 @@ public class PotionPalCommand implements CommandExecutor, TabCompleter {
                                 if(cs != null) {
                                     ItemStack itemStack = new ItemStack(Material.valueOf(cs.getString("item")));
                                     ItemMeta itemMeta = itemStack.getItemMeta();
-                                    itemMeta.setDisplayName(ColorUtils.translateColors(cs.getString("display_name")));
-                                    itemMeta.setLore(cs.getStringList("lore").stream().map(ColorUtils::translateColors).collect(Collectors.toList()));
+                                    itemMeta.setDisplayName(
+                                            MessageHelper.format(cs.getString("display_name")));
+                                    itemMeta.setLore(cs.getStringList("lore").stream().map(
+                                            MessageHelper::format).collect(Collectors.toList()));
                                     itemStack.setItemMeta(itemMeta);
                                     player.getInventory().addItem(itemStack);
 
-                                    commandSender.sendMessage(ColorUtils.translateColors(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.GREEN + "Item has been given!");
-                                    player.sendMessage(ColorUtils.translateColors(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.GREEN + "You received " + ColorUtils.translateColors(cs.getString("display_name")) + ChatColor.GREEN + "!");
-                                } else commandSender.sendMessage(ColorUtils.translateColors(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.RED + "Item not found!");
-                            } else commandSender.sendMessage(ColorUtils.translateColors(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.RED + "Player not found!");
+                                    commandSender.sendMessage(
+                                            MessageHelper.format(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.GREEN + "Item has been given!");
+                                    player.sendMessage(
+                                            MessageHelper.format(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.GREEN + "You received " + MessageHelper.format(cs.getString("display_name")) + ChatColor.GREEN + "!");
+                                } else commandSender.sendMessage(
+                                        MessageHelper.format(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.RED + "Item not found!");
+                            } else commandSender.sendMessage(
+                                    MessageHelper.format(PotionPal.getInstance().getConfig().getString("prefix")) + ChatColor.RED + "Player not found!");
                         } else commandSender.sendMessage(ChatColor.RED + "Usage: /potionpal give <player> <item>");
                     } else commandSender.sendMessage(ChatColor.RED + "No permissions!");
                 } else {
